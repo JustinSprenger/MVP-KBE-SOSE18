@@ -11,6 +11,7 @@ public class App
 {
     public static void main( String[] args )
     {
+        ClassLoader classLoader = App.class.getClassLoader();
     	String cls;
     	try {
 			cls = PropsFileUtil.readProperties(args[0]).getProperty("classToLoad");
@@ -20,7 +21,15 @@ public class App
 			e.printStackTrace();
 		}
     	cls = "de.htw.ai.kbe.MyClassWithRunMes";
-    	
+    	Class aClass;
+		try {
+			aClass = classLoader.loadClass("com.jenkov.MyClass");
+			System.out.println("aClass.getName() = " + aClass.getName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     	
     	System.out.println( "Hello World!" );
     }
