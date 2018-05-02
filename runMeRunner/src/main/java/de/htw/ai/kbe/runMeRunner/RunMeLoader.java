@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class RunMeLoader {
 		return validInput;
 	}
 
-	public void runMethods(String outputFilename) {
+	public void runMethods(String outputFilename)  {
 		this.load();
 		int methodCount = 0;
 		List<String> methodNamesWithRunMe = new ArrayList<String>();
@@ -64,26 +65,10 @@ public class RunMeLoader {
 			if(method.isAnnotationPresent(RunMe.class)) {
 				
 				methodNamesWithRunMe.add(method.getName());
-				 if(!method.isAccessible())
-					 
-				try {
-					notInvokable = (boolean) method.invoke(method.getClass().newInstance());
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if(!notInvokable)
-					methodNamesNotInvokable.add(method.getName());
 				
+				if(Modifier.isPrivate(method.getModifiers()))
+					methodNamesNotInvokable.add(method.getName());
+	
 			}
 		}
 
