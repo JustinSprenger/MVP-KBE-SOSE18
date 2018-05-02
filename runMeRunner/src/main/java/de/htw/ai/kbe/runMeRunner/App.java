@@ -21,7 +21,7 @@ public class App
 		}
     	cls = "de.htw.ai.kbe.MyClassWithRunMes";
     	
-    	
+    	//method.invoke();
     	System.out.println( "Hello World!" );
     }
     
