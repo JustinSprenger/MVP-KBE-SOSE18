@@ -4,4 +4,4 @@ Komponentenbasierte Entwicklung
 MVP
 
 Justin Sprenger
-Veselin Odjov
+Veselin Odzhov
