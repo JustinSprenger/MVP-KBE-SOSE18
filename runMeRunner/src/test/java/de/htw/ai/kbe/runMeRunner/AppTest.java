@@ -80,7 +80,7 @@ public class AppTest
 		try {
 		rml.validInput("props.properties");
 		rml.runMethods(null);
-		assertTrue(true);
+		assertTrue(false);
 		} catch (Exception e) { 
 			assertTrue(true);
 		}
