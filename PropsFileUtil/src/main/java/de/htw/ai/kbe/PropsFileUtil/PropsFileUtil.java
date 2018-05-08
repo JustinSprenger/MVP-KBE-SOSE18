@@ -11,13 +11,13 @@ public class PropsFileUtil {
 	public static Properties readProperties(String name) throws PropsFileReadException, IOException{
 		Properties props = new Properties();
 		String fname = "";
-		if(name != null){
+		if(name != null && name !=""){
 			fname = name.replaceAll("\\s","");
 		}
-		if(name == null||fname == ""){
-			throw new PropsFileReadException("Filename ist Null");
+		else {
+			throw new PropsFileReadException("Filename ist leer oder falsch.");
 		}
-		if(name.endsWith(".properties")){
+		if(name.endsWith(".properties") && fname != ""){
 			
 		}else{
 			throw new PropsFileReadException("Es ist keine Properties datei");
