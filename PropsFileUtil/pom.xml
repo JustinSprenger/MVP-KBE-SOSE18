@@ -4,7 +4,7 @@
 
   <groupId>de.htw.ai.kbe</groupId>
   <artifactId>PropsFileUtil</artifactId>
-  <version>0.0.1</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>PropsFileUtil</name>
@@ -22,4 +22,20 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+	<plugins>
+		<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<fork>true</fork>
+					<executable>C:\Program Files\Java\jdk1.8.0_172\bin\javac</executable>
+				</configuration>
+		</plugin>
+	</plugins>
+</build>
+
 </project>

@@ -33,15 +33,19 @@ public class RunMeLoader {
 
 	public boolean validInput(String input) {
 		boolean validInput = false; 
+		if(input!=null || input != "") {
 		
 		try {
-			if(!PropsFileUtil.readProperties(input).getProperty("classToLoad").isEmpty()) {
+			if(PropsFileUtil.readProperties(input).containsKey("classToLoad") && !PropsFileUtil.readProperties(input).getProperty("classToLoad").isEmpty()) {
 				validInput = true; 
 				cls=PropsFileUtil.readProperties(input).getProperty("classToLoad");
-			}else {
+			}else 
+			{
 				validInput = false; 
-				System.out.println("In der Props ist kein Klassenname enthalten");
+				System.out.println("In der Props ist kein oder falscher Klassenname enthalten");
 			}
+			
+			
 		} catch (PropsFileReadException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -49,6 +53,11 @@ public class RunMeLoader {
 		}
 					
 		return validInput;
+		}
+		else {
+			System.out.println("Die properties Datei wurde nicht angegeben!");
+			return false;
+		}
 	}
 
 	public void runMethods(String outputFilename)  {
@@ -72,40 +81,45 @@ public class RunMeLoader {
 			}
 		}
 
-		if(!outputFilename.isEmpty()) {
+		if(!outputFilename.isEmpty() && outputFilename!=null) {
 			PrintStream output = null;
 			try {
 				output = new PrintStream(new FileOutputStream(outputFilename));
 				
-				output.printf("Anzahl der Methoden : %d%n", methodCount);
-								
+				output.printf("--------------------------------------------------------");
+				output.printf("%nName der Klasse : %s", cls);
+				output.printf("%n%nAnzahl der Methoden : %d", methodCount);
+				
+				output.printf("%n%nAnzahl der Methoden mit Anno : %d", methodNamesWithRunMe.size());
 				for(int j =0; j < methodNamesWithRunMe.size();j++) {
-					output.printf("%n%nMethoden mit Anno%nMethod %d : %s%n", j, methodNamesWithRunMe.get(j));
+					output.printf("%n   %d.Method : %s", j+1, methodNamesWithRunMe.get(j));
 				}
 				
+				output.printf("%n%nAnzahl der Methoden mit Anno nicht invokabel : %d", methodNamesNotInvokable.size());
 				for(int j =0; j < methodNamesNotInvokable.size();j++) {
-					output.printf("%n%nMethoden mit Anno nicht invokabel%nMethod %d : %s%n", j, methodNamesNotInvokable.get(j));
+					output.printf("%n   %d.Method : %s", j+1, methodNamesNotInvokable.get(j));
 				}
+				output.printf("%n--------------------------------------------------------%n");
+				System.setOut(output);
 				
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			System.setOut(output);
-		}
+					}
 		else {
-			
-			
-			System.out.printf("Anzahl der Methoden - %d%n", methodCount);
-							
+			System.out.printf("--------------------------------------------------------");
+			System.out.printf("%nName der Klasse : %s", cls);
+			System.out.printf("%n%nAnzahl der Methoden : %d", methodCount);
+			System.out.printf("%n%nAnzahl der Methoden mit Anno : %d", methodNamesWithRunMe.size());
 			for(int j =0; j < methodNamesWithRunMe.size();j++) {
-				System.out.printf("%n%nMethoden mit Anno%nMethod  : %s%n", methodNamesWithRunMe.get(j));
+				System.out.printf("%n   %d.Method : %s", j, methodNamesWithRunMe.get(j));
 			}
-			
+			System.out.printf("%n%nAnzahl der Methoden mit Anno nicht invokabel : %d", methodNamesNotInvokable.size());
 			for(int j =0; j < methodNamesNotInvokable.size();j++) {
-				System.out.printf("%n%nMethoden mit Anno nicht invokabel%nMethod %d : %s%n", j, methodNamesNotInvokable.get(j));
+				System.out.printf("%n   %d.Method : %s", j, methodNamesNotInvokable.get(j));
 			}
+			System.out.printf("%n--------------------------------------------------------%n");
 		}
 		
 	}
