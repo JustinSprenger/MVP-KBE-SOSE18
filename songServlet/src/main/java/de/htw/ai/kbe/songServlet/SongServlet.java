@@ -28,9 +28,8 @@ public class SongServlet extends HttpServlet {
 	public void init(ServletConfig servletConfig) throws ServletException {
 		this.mySignature = servletConfig.getInitParameter("signature");
 		try {
-			songs = ServletMethods.readJSONToSongs("songs.json");
-			
-			System.out.println("\n\nLaenge: "  +"\n\n");
+			songs = ServletMethods.readJSONToSongs("D:/Uni/eclipse-workspace/MVP-KBE-SOSE18/MVP-KBE-SOSE18/songServlet/songs.json");
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,23 +53,25 @@ public class SongServlet extends HttpServlet {
 			param = paramNames.nextElement();
 			switch (param) {
 			case "all": {
-					response.setContentType("application/json");
-					response.setCharacterEncoding("UTF-8");
-					ObjectMapper objectMapper = new ObjectMapper();
-					objectMapper.writerWithDefaultPrettyPrinter().writeValue(response.getOutputStream(), songs);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				ObjectMapper objectMapper = new ObjectMapper();
+				objectMapper.writerWithDefaultPrettyPrinter().writeValue(response.getOutputStream(), songs);
 			}
 				break;
 			case "id": {
-
+				int songID = (request.getParameterValues(param)[0].toString()).matches("\\d+(\\.\\d+)?") ? Integer.valueOf(request.getParameterValues(param)[0].toString()) : -1;
+			
+				if((songs.stream().filter(x -> x.getId()==songID).findAny().orElse(null))!=null)
+					responseStr = (songs.stream().filter(x -> x.getId()==songID).findAny().orElse(null).toString());
+				else
+					responseStr = "Song with such ID doesn\'t exist!";
 			}
 				break;
 			default: {
-
+				responseStr = "Try again using ?all or ?id=<number>.";
 			}
 			}
-			
-			
-			responseStr = responseStr + param + "=" + request.getParameter(param) + "\n";
 		}
 		response.setContentType("text/plain");
 		try (PrintWriter out = response.getWriter()) {

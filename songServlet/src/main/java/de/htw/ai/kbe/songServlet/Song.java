@@ -50,8 +50,8 @@ public class Song {
 
   @Override
   public String toString() {
-      return "OurSong [id=" + id + ", title=" + title + ", artist=" + artist + ", album=" + album + ", released="
-              + released + "]";
+      return "\n{\n   \"id\" = " + id + ",\n   \"title\" = \"" + title + "\",\n   \"artist\" = \"" + artist + "\",\n   \"album\" = \"" + album + "\",\n   \"released\" = "
+              + released + "\n}";
   }
 	
 }
