@@ -16,15 +16,25 @@ import javax.xml.bind.Unmarshaller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 
 public class ServletMethods {
-	// Reads a list of songs from an XML-file into Songs.java
-	static Song readXMLToSongs(String filename) throws JAXBException, FileNotFoundException, IOException {
-		JAXBContext context = JAXBContext.newInstance(Song.class);
+	// Reads a list of songs from an XML-file into Songs.java xjc –d <dir> -p <packages> <xsd-filename>
+	static Songs readXMLToSongs(InputStream is) throws JAXBException, FileNotFoundException, IOException {
+		JAXBContext context = JAXBContext.newInstance(Songs.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		try (InputStream is = new BufferedInputStream(new FileInputStream(filename))) {
-			return (Song) unmarshaller.unmarshal(is);
-		}
+		return (Songs) unmarshaller.unmarshal(is);
+		
+		//XmlMapper xmlMapper = new XmlMapper();
+       // return xmlMapper.readValue(is, Songs.class).getSongs().get(0);
+	}
+	
+	static void writeSongsToXML(Songs songs, OutputStream os) throws JAXBException, FileNotFoundException, IOException {
+		JAXBContext context = JAXBContext.newInstance(Songs.class);
+		Marshaller marshaller = context.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		marshaller.marshal(songs, os);
 	}
 
 	// Reads a list of songs from a JSON-file into List<Song>
@@ -32,7 +42,6 @@ public class ServletMethods {
 	static List<Song> readJSONToSongs(String filename) throws FileNotFoundException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		try (InputStream is = new BufferedInputStream(new FileInputStream(filename))) {
-			//System.out.println("\n\nList<Song>: "+(List<Song>) objectMapper.readValue(is, new TypeReference<List<Song>>(){})+"\n\n");
 			return (List<Song>) objectMapper.readValue(is, new TypeReference<List<Song>>(){});
 		}
 	}
@@ -44,5 +53,6 @@ public class ServletMethods {
 			objectMapper.writeValue(os, songs);
 		}
 	}
+	
 }
 

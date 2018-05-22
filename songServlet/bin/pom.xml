@@ -31,11 +31,6 @@
 			<version>5.0.1.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>commons-digester</groupId>
-			<artifactId>commons-digester</artifactId>
-			<version>2.1</version>
-		</dependency>
 		<!-- 
 		mockServletResponse.setContentType() needs 
 		org/springframework/http/MediaType 
@@ -63,11 +58,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.2</version>
         </dependency>
-		<dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-xml</artifactId>
-            <version>2.9.5</version>
-        </dependency>
+		
 	<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/jaxb2-maven-plugin -->
 	<dependency>
 		<groupId>org.codehaus.mojo</groupId>
