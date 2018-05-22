@@ -16,12 +16,13 @@ import javax.xml.bind.annotation.XmlType;
 public class Songs {
 
     @XmlElement(required = true)
-    protected List<Object> song;
+    protected List<Song> songs;
 
-    public List<Object> getSong() {
-        if (song == null) {
-            song = new ArrayList<Object>();
-        }
-        return this.song;
-    }    
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+	public void setSongs(List<Song> songs) {
+		this.songs = songs;
+	}    
 }

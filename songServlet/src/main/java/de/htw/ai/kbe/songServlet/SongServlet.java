@@ -69,7 +69,7 @@ public class SongServlet extends HttpServlet {
 				if(request.getContentType().endsWith("xml")) {
 					response.setContentType("application/xml");
 					Songs songz = new Songs();
-					songs.forEach(sg -> songz.getSong().add(sg));
+					songs.forEach(sg -> songz.getSongs().add(sg));
 					try {
 						ServletMethods.writeSongsToXML(songz, response.getOutputStream());
 					} catch (JAXBException e) {
@@ -85,14 +85,21 @@ public class SongServlet extends HttpServlet {
 				
 				if(songID!=-1 && (songs.stream().filter(x -> x.getId()==songID).findAny().orElse(null))!=null) {
 					if(request.getContentType().endsWith("json")) {
+						System.out.println("komme ich hierher?");
 						response.setContentType("application/json");
 						objectMapper.writerWithDefaultPrettyPrinter().writeValue(response.getOutputStream(), songs.stream().filter(x -> x.getId()==songID).findAny().orElse(null));
 					}
 					if(request.getContentType().endsWith("xml")) {
 						response.setContentType("application/xml");
-						
+						System.out.println("asdasdas: " +songs.get(0));
+
 						Songs songz = new Songs();
-						songz.getSong().add(songs.stream().filter(x -> x.getId()==songID).findAny().orElse(null));
+						songz.setSongs(new ArrayList<Song>());
+						Song song = (Song) songs.get(0);
+						
+						songz.getSongs().add(song);
+						
+						songz.getSongs().forEach(x -> System.out.println("asdf + id" + x));
 						
 						try {
 							ServletMethods.writeSongsToXML(songz , response.getOutputStream());
@@ -146,8 +153,8 @@ public class SongServlet extends HttpServlet {
 			
 		if(request.getContentType().endsWith("xml")) {
 			try {
-				Songs songz;// = ServletMethods.readXMLToSongs(request.getInputStream());
-				Song song = (Song) songz.getSong().get(0);
+				Songs songz = ServletMethods.readXMLToSongs(request.getInputStream());
+				Song song = (Song) songz.getSongs().get(0);
 				song.setId(++id);
 				songs.add(song);
 				
@@ -177,5 +184,4 @@ public class SongServlet extends HttpServlet {
 	protected String getSignature () {
 		return this.mySignature;
 	}
-	
 }
