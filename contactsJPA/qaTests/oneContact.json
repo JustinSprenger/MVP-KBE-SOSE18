@@ -1,0 +1,10 @@
+{
+	"firstName": "Little Bobby",
+	"lastName": "Brown",
+	"mobile": "+13032345678",
+	"emailAddress": "bobby.brown@gmail.com",
+	"addressSet":
+	[ {"street": "Main St.","city": "New York, NY", "zip": "10010","country": "USA"},
+	  {"street": "Other St.","city": "Albany, NY", "zip": "20020","country": "USA"}
+	]
+} 

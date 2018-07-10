@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contact>
+    <addressSet>
+       <street>Berliner Str 2</street>
+       <city>BERLIN</city>
+       <country>GER</country>
+       <zip>10713</zip>
+    </addressSet>
+    <addressSet>
+       <street>Willie Str 22</street>
+       <city>BERLIN</city>
+       <country>GER</country>
+       <zip>12345</zip>
+    </addressSet>
+    <emailAddress>HANS@gmx.de</emailAddress>
+    <firstName>HANS</firstName>
+    <mobile>+4927712345678</mobile>
+</contact> 
