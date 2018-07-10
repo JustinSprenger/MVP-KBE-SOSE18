@@ -58,20 +58,21 @@ public class SongListWebService {
 	public Response post(@HeaderParam("Authorization") String token, @PathParam("userId") String userID, @Context UriInfo uriInfo, SongList songList) {
 		Response ret = Response.status(401).entity("Error. Invalid authorization.\n").build();
 		if(Auth.isTokenValid(token)) {	
-			if (Auth.findUserByToken(token).equals(userID)) {
-				if (songList != null) {
-					int newID = songListsDAO.post(songList);
-					if (newID != -1) {
-						ret = Response.status(201).entity(uriInfo.getAbsolutePathBuilder().path(Integer.toString(newID)).build().toString()).build();
-					} else {
-						ret = Response.status(400).entity("ERROR. Invalid input.\n").build();
-					}
-				} else {
-					ret = Response.status(400).entity("ERROR. Invalid input.\n").build();
-				}
-			} else {
-				ret = Response.status(401).entity("ERROR. Not allowed to post Songlists for other users.\n").build();
-			}
+//			if (Auth.findUserByToken(token).equals(userID)) {
+//				if (songList != null) {
+//					int newID = songListsDAO.post(songList);
+//					if (newID != -1) {
+//						ret = Response.status(201).entity(uriInfo.getAbsolutePathBuilder().path(Integer.toString(newID)).build().toString()).build();
+//					} else {
+//						ret = Response.status(400).entity("ERROR. Invalid input.\n").build();
+//					}
+//				} else {
+//					ret = Response.status(400).entity("ERROR. Invalid input.\n").build();
+//				}
+//			} else {
+//				ret = Response.status(401).entity("ERROR. Not allowed to post Songlists for other users.\n").build();
+//			}
+		ret = Response.status(400).entity("WARNING. POST Method for SongList not implemented!\n").build();
 		}
 		return ret;
 	}

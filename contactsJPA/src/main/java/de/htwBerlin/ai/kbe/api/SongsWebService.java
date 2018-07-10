@@ -100,7 +100,7 @@ public class SongsWebService {
 			if (song != null) {
 				ret = Response.status(400).entity("Error. Song ID should be the same in both Payload and the URL.\n").build();
 				if (song.getId() == id) {
-					ret = Response.status(404).entity("Error. No data with ID " + id + " gefunden.\n").build();
+					ret = Response.status(404).entity("Error. No data with ID " + id + " found.\n").build();
 					if (songsDAO.put(song)) {
 						ret = Response.status(204).build();
 					}
@@ -136,7 +136,7 @@ public class SongsWebService {
 				if (songsDAO.delete(id))
 					ret = Response.status(204).build();
 				else
-					ret = Response.status(404).entity("Error. No data with ID " + id + " gefunden.\n").build();
+					ret = Response.status(404).entity("Error. No data with ID " + id + " found.\n").build();
 			}
 		}
 		return ret;
