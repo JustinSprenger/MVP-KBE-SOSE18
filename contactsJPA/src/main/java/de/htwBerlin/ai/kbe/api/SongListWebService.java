@@ -40,12 +40,14 @@ public class SongListWebService {
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response getOne(@HeaderParam("Authorization") String token, @PathParam("userId") String userID, @PathParam("id") int id) {
 		Response ret = Response.status(401).entity("Error. Invalid authorization.\n").build();
-		if(Auth.isTokenValid(token)) {	
-			return (songListsDAO.getOne(id, userID, Auth.findUserByToken(token)) != null)
-					? Response.status(200)
+		if(Auth.isTokenValid(token)) {
+			if (songListsDAO.getOne(id, userID, Auth.findUserByToken(token)) != null) {
+				if(!songListsDAO.getOne(id, userID, Auth.findUserByToken(token)).getEntity().isPrivate())
+					ret = Response.status(200)
 							.entity((GenericEntity<SongList>) songListsDAO.getOne(id, userID, Auth.findUserByToken(token)))
-							.build()
-					: Response.status(404).entity("ERROR. No data found.").build();
+							.build();
+			} else { 
+				ret = Response.status(404).entity("ERROR. No data found.").build(); }
 		}
 		return ret;
 	}
@@ -86,9 +88,11 @@ public class SongListWebService {
 			if (Auth.findUserByToken(token).equals(userID)) {
 				if (songListsDAO.delete(id, userID)) {
 					ret = Response.status(204).build();
+				} else {
+					ret = Response.status(404).entity("ERROR. No data found.").build();					
 				}
 			} else {
-				ret = Response.status(401).entity("ERROR. Not allowed to post Songlists for other users.\n").build();
+				ret = Response.status(401).entity("ERROR. Not allowed to delete Songlists for other users.\n").build();
 			}
 		}
 		return ret;

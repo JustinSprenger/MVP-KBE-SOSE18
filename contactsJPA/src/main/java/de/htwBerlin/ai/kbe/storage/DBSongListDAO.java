@@ -94,7 +94,7 @@ public class DBSongListDAO implements SongListDAO {
 				if (em.find(SongList.class, id) != null && em.find(SongList.class, id).getUser().getUserId().equals(userIDOwner)) {
 					if (userIDOwner.equals(userIDCaller)) {
 						ret = new GenericEntity<SongList>(em.find(SongList.class, id)) {};
-					} else if (!em.find(SongList.class, id).isPrivate()) {
+					} else {
 						ret = new GenericEntity<SongList>(em.find(SongList.class, id)) {};
 					}
 				}
