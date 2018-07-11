@@ -1,0 +1,20 @@
+{
+    "isPrivate": true,
+    "name": "ElenasPrivateBAD",
+    "songList": [
+        {
+            "id": 20,
+            "title": "JSON Years",
+            "artist": "Jason",
+            "album": "Jason 2018",
+            "released": 2018
+        },
+        {
+            "id": 100,
+            "title": "Stop the Feeling",
+            "artist": "Justin Timberlake",
+            "album": "Trolls",
+            "released": 2016
+        }
+    ]
+} 

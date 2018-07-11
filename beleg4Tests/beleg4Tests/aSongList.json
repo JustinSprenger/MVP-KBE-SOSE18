@@ -1,0 +1,21 @@
+{
+	"isPrivate": true,
+	"name": "ElenasPrivate",
+	"songList": [
+		{
+			"id": 20,
+			"title": "JSON Years",
+			"artist": "Jason",
+			"album": "Jason 2018",
+			"released": 2018
+		},
+		{
+			"id": 1,
+			"title": "Can’t Stop the Feeling",
+			"artist": "Justin Timberlake",
+			"album": "Trolls",
+			"released": 2016
+		}
+	]
+}
+ 

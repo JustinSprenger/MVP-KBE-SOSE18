@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<songList>
+	<isPrivate>false</isPrivate>
+	<name>ElenasNewPublic</name>
+	<song>
+		<album>Thank You</album>
+		<artist>Meghan Trainor, Kelli Trainor</artist>
+		<id>2</id>
+		<released>2016</released>
+		<title>Mom</title>
+	</song>
+	<song>
+		<album>Trolls</album>
+		<artist>Justin Timberlake</artist>
+		<id>1</id>
+		<released>2016</released>
+		<title>Can’t Stop the Feeling</title>
+	</song>
+</songList> 
